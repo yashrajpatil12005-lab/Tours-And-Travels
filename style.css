@@ -72,8 +72,7 @@ nav a:hover {
 /* HERO */
 .hero {
   height: 100vh;
-  background: url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee")
-    center/cover no-repeat;
+  background: url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee") center/cover no-repeat;
   position: relative;
   display: flex;
   align-items: center;
@@ -82,11 +81,9 @@ nav a:hover {
 .overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    to right,
-    rgba(0, 0, 0, 0.85),
-    rgba(0, 0, 0, 0.4)
-  );
+  background: linear-gradient(to right,
+      rgba(0, 0, 0, 0.85),
+      rgba(0, 0, 0, 0.4));
 }
 
 .hero-content {
@@ -238,6 +235,7 @@ nav a:hover {
   font-size: 12px;
   color: #f5a623;
 }
+
 /* LOGO FIX – GUARANTEED VISIBLE */
 .logo {
   display: flex;
@@ -318,14 +316,12 @@ nav a:hover {
 /* IMAGE */
 .package-image {
   height: 260px;
-  background: url("https://images.unsplash.com/photo-1546182990-dffeafbe841d")
-    center/cover no-repeat;
+  background: url("https://images.unsplash.com/photo-1546182990-dffeafbe841d") center/cover no-repeat;
   position: relative;
 }
 
 .package-card-alt .package-image {
-  background: url("https://exploreindia.tv/wp-content/uploads/incredible-india-malvan-india-beach-1.jpg")
-    center/cover no-repeat;
+  background: url("https://exploreindia.tv/wp-content/uploads/incredible-india-malvan-india-beach-1.jpg") center/cover no-repeat;
 }
 
 /* TAGS */
@@ -435,6 +431,7 @@ nav a:hover {
   transition: background 0.3s ease;
   margin-top: 85px;
 }
+
 .details-btn {
   display: block;
   text-align: center;
@@ -445,7 +442,7 @@ nav a:hover {
   border-radius: 14px;
   font-weight: 600;
   transition: background 0.3s ease;
-  
+
 }
 
 .details-btn:hover {
@@ -522,6 +519,7 @@ nav a:hover {
   background-image: url("https://good-nature-blog-uploads.s3.amazonaws.com/uploads/2022/06/Male-tiger-with-his-cubs-at-a-reserve-in-India-1280x640.jpg");
   background-size: cover;
 }
+
 /* .zone-card:not(.large):not(.green):not(.light) {
   background-image: url("https://images.unsplash.com/photo-1516642898673-edd1ced8b7f9");
 } */
@@ -715,19 +713,16 @@ nav a:hover {
 .contact-us {
   position: relative;
   padding: 120px 60px;
-  background: url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee")
-    center / cover no-repeat;
+  background: url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee") center / cover no-repeat;
   color: #ffffff;
 }
 
 .contact-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    to right,
-    rgba(6, 95, 70, 0.95),
-    rgba(6, 95, 70, 0.75)
-  );
+  background: linear-gradient(to right,
+      rgba(6, 95, 70, 0.95),
+      rgba(6, 95, 70, 0.75));
 }
 
 .contact-container {
@@ -1071,6 +1066,7 @@ nav a:hover {
 }
 
 @media (max-width: 768px) {
+
   /* NAVBAR */
   .navbar {
     flex-direction: column;
@@ -1247,6 +1243,7 @@ body.booking-page {
   margin-top: 15px;
   text-align: center;
 }
+
 .directing-links {
   text-decoration: none;
 }
@@ -1267,6 +1264,7 @@ body.booking-page {
     align-items: center;
   }
 }
+
 /* RESPONSIVE */
 @media (max-width: 1024px) {
   .why-grid {
@@ -1364,6 +1362,7 @@ body.booking-page {
 
 /* ===== TABLETS (max-width: 768px) ===== */
 @media (max-width: 768px) {
+
   /* NAVBAR */
   .navbar {
     flex-wrap: wrap;
@@ -1394,7 +1393,7 @@ body.booking-page {
     margin: 0;
     padding: 10px 0;
     font-size: 16px;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   }
 
   .nav-actions {
@@ -2288,3 +2287,95 @@ html {
 }
 
 
+/* SUCCESS MODAL */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-content {
+  background: white;
+  padding: 40px;
+  border-radius: 20px;
+  text-align: center;
+  max-width: 400px;
+  width: 90%;
+  transform: scale(0.7);
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.modal-overlay.active .modal-content {
+  transform: scale(1);
+}
+
+.modal-icon {
+  width: 70px;
+  height: 70px;
+  background: #e6fff3;
+  color: #0a7b57;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36px;
+  margin: 0 auto 20px;
+}
+
+.modal-content h3 {
+  font-size: 24px;
+  color: #1f2937;
+  margin-bottom: 15px;
+}
+
+.modal-content p {
+  color: #6b7280;
+  margin-bottom: 25px;
+  line-height: 1.5;
+}
+
+.modal-btn {
+  background: #0a7b57;
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 25px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.2s;
+  width: 100%;
+}
+
+.modal-btn:hover {
+  background: #047857;
+}
+
+/* Error State Styles */
+.modal-icon.error {
+  background: #ffe5e5;
+  color: #ef4444;
+}
+
+.modal-btn.error {
+  background: #ef4444;
+}
+
+.modal-btn.error:hover {
+  background: #dc2626;
+}
