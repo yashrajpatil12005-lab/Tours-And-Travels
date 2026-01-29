@@ -36,7 +36,7 @@ if (form) {
 
     // ✅ Replace with your actual Google Apps Script Web App URL
     const SCRIPT_URL =
-      "https://script.google.com/macros/s/AKfycbwM7bmSCZ6Nkkzsf26Kxg5aLa2qoNeQfL_sV8B8yykkuWj3yh8o9mJ8rvPPIYUV6CCZ/exec";
+      "https://script.google.com/macros/s/AKfycbzqm9_H4u7fNcSA55mZXGfsS8qT0Yi3oIOU2Neqfym1PxDBvuhyNbQhSsTQUCjn1IfU/exec";
     console.log("🔗 Target URL:", SCRIPT_URL);
 
     // Script URL is configured.
@@ -89,3 +89,4 @@ if (form) {
     }
   });
 }
+
