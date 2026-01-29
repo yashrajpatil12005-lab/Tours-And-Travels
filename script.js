@@ -17,6 +17,62 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
 // Form Submission to Google Apps Script
 const form = document.getElementById("safariForm");
 const statusDiv = document.getElementById("formStatus");
+const statusModal = document.getElementById("statusModal");
+const closeModalBtn = document.getElementById("modalBtn");
+
+// Dynamic Modal Elements
+const modalIcon = document.getElementById("modalIcon");
+const modalTitle = document.getElementById("modalTitle");
+const modalMessage = document.getElementById("modalMessage");
+const modalBtn = document.getElementById("modalBtn");
+
+// Close Modal Function
+function closeModal() {
+  if (statusModal) {
+    statusModal.classList.remove("active");
+  }
+}
+
+if (closeModalBtn) {
+  closeModalBtn.addEventListener("click", closeModal);
+}
+
+// Close on outside click
+if (statusModal) {
+  statusModal.addEventListener("click", (e) => {
+    if (e.target === statusModal) {
+      closeModal();
+    }
+  });
+}
+
+// Helper to show modal
+function showModal(isSuccess, title, message) {
+  if (!statusModal) return;
+
+  if (isSuccess) {
+    if (modalIcon) {
+      modalIcon.innerHTML = "✓";
+      modalIcon.classList.remove("error");
+    }
+    if (modalBtn) {
+      modalBtn.classList.remove("error");
+    }
+  } else {
+    if (modalIcon) {
+      modalIcon.innerHTML = "✕";
+      modalIcon.classList.add("error");
+    }
+    if (modalBtn) {
+      modalBtn.classList.add("error");
+    }
+  }
+
+  if (modalTitle) modalTitle.innerText = title;
+  if (modalMessage) modalMessage.innerText = message;
+
+  statusModal.classList.add("active");
+}
 
 if (form) {
   form.addEventListener("submit", async function (e) {
@@ -36,16 +92,13 @@ if (form) {
 
     // ✅ Replace with your actual Google Apps Script Web App URL
     const SCRIPT_URL =
-      "https://script.google.com/macros/s/AKfycbzqm9_H4u7fNcSA55mZXGfsS8qT0Yi3oIOU2Neqfym1PxDBvuhyNbQhSsTQUCjn1IfU/exec";
+      "https://script.google.com/macros/s/AKfycbwM7bmSCZ6Nkkzsf26Kxg5aLa2qoNeQfL_sV8B8yykkuWj3yh8o9mJ8rvPPIYUV6CCZ/exec";
     console.log("🔗 Target URL:", SCRIPT_URL);
-
-    // Script URL is configured.
 
     try {
       const response = await fetch(SCRIPT_URL, {
         method: "POST",
         body: JSON.stringify(data),
-        // Important: Using text/plain avoids CORS preflight OPTIONS request which GAS doesn't handle
         headers: {
           "Content-Type": "text/plain;charset=utf-8",
         },
@@ -60,33 +113,37 @@ if (form) {
       try {
         result = JSON.parse(textResult);
       } catch (err) {
-        console.warn(
-          "⚠️ Could not parse JSON. Response might be an HTML error page from Google."
-        );
-        throw new Error(
-          "Server returned non-JSON response: " + textResult.substring(0, 100)
-        );
+        console.warn("⚠️ Could not parse JSON.");
+        throw new Error("Invalid server response.");
       }
 
       console.log("✅ Parsed Result:", result);
 
       if (result.result === "success") {
-        statusDiv.innerText = "Thank you! Form submitted successfully.";
-        statusDiv.style.color = "#2ecc71";
+        showModal(
+          true,
+          "Submission Successful!",
+          "Thank you for booking with us. We will get back to you shortly."
+        );
         form.reset();
       } else {
         console.error("❌ Server returned logic error:", result);
-        statusDiv.innerText = "Something went wrong. Please try again.";
-        statusDiv.style.color = "#e74c3c";
+        showModal(
+          false,
+          "Submission Failed",
+          "There was an issue submitting your form. Please try again."
+        );
       }
     } catch (error) {
       console.error("Error!", error.message);
-      statusDiv.innerText = "Error submitting form. Please try WhatsApp.";
-      statusDiv.style.color = "#e74c3c";
+      showModal(
+        false,
+        "Error",
+        "Could not connect to the server. Please check your internet connection or use WhatsApp."
+      );
     } finally {
       submitBtn.innerText = originalBtnText;
       submitBtn.disabled = false;
     }
   });
 }
-
